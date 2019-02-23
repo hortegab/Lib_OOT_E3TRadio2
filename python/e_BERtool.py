@@ -39,6 +39,7 @@ Puede ser vista como una senal que cada N muestras representa la actualizacion d
 
 NOTA IMPORTANTE:
 * El bloque e_canal_BER es el que se ha estado usando para generar la senal que entra por in0. Las limitaciones que eso genera son las siguientes:
+   ** El canal e_canal_BER esta pensado para llevar envolvente compleja, es decir simbolos. Por lo tanto, lo que realmente se está obteniendo en una Curva de SER. Convertir eso a Curva de BER puede que no sea tan facil, necesitaria no contar con que en in1 e in2 esten las senales de bits en vez de simbolos, sino que habria que ajustar la senal destinada a la entrada in0 para que hacer que por cada bit haya un valor de Es/No o de Eb/No
    ** El bloque e_canal_BER lo que entrega es la relacion Es/No.
    ** Convertir Es/No a Eb/No es posible pero como parte de un flujogramas donde se conozca el numero de bits por simbolo (Bps), teniendo en cuenta que, en términos lineales, Eb=Es/Bps
    ** La manera en que esta hecho el bloque e_canal_BER hace que si el numero de muestras por simbolo es mayor a 1 (Sps>1), la senal Es/No sale con Sps valores por simbolo. En ese caso se requeriria aplicar algun tipo de mejora ya que nuestro bloque supone que solo hay una muestra Es/No (o Es/No) por cada muestra de senal en in1 e in2.
