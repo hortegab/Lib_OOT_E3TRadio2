@@ -1,0 +1,435 @@
+INSTRUCCIONES
+- Esta es el Módulo OOT oficial de la E3T, dedicado principalmente para las clases de comunicaciones y demás necesidades. Un Módulo OOT, vine de "Out-Of-Tree" es el término usado en GNU rado para referirse a una libreria.
+
+Para usar este módulo en GRC, en un nuevo PC
+
+1. Limpiar la carpeta build, mejor dicho, borrarle todo internamente, para que quede vacia
+2. desde la carpeta build realizar la instalación con los siguientes comandos:
+cmake ..
+make
+sudo make install
+sudo ldconfig
+
+
+A CONTINUACION SE MUESTRA UNA PRUEBA O EJEMPLO DE LO REALIZADO
+
+# desde la carpeta buid se invoca la herramienta cmake
+# Lo que ocurre con los siguientes comandos es que todo lo que hemos hecho se 
+# transforma al punto de integrarse al sistema de archivos de gnu radio, pero ojo
+# ya gnu radio no va a buscar nuestro módulo en este sitio, pues le ha sacado una copia
+# para incorporarla al sistema de archivos de gnu radio, que tiene un lugar de almacenamiento especial.
+# Por lo anterior, nuestro módulo puede ser movido sin problemas a cualquier parte. 
+# Por ejemplo, se puede compartir con los estudiantes o llevarlo a otro computador.
+# Antes de compartir con otras personas un módulo es importante limpiar la carpeta build, 
+# pues ella tiene información del último computador en que fué instalado. En resumen,
+# lo que debe hacer la otra persona es: entrar con ubuntu al módulo, luego a la carpeta build y continuar
+# con los siguientes comandos.
+
+hob@RG4:~/gr-rghob/build$ cmake ..
+-- The CXX compiler identification is GNU 5.2.1
+-- The C compiler identification is GNU 5.2.1
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Build type not specified: defaulting to release.
+-- Boost version: 1.58.0
+-- Found the following Boost libraries:
+--   filesystem
+--   system
+-- Found PkgConfig: /usr/bin/pkg-config (found version "0.28") 
+-- checking for module 'cppunit'
+--   found cppunit, version 1.13.2
+-- Found CPPUNIT: /usr/lib/x86_64-linux-gnu/libcppunit.so;dl  
+-- Found Doxygen: /usr/bin/doxygen (found version "1.8.9.1") 
+Checking for GNU Radio Module: RUNTIME
+-- checking for module 'gnuradio-runtime'
+--   found gnuradio-runtime, version 3.7.9.1
+ * INCLUDES=/usr/local/include
+ * LIBS=/usr/local/lib/libgnuradio-runtime.so;/usr/local/lib/libgnuradio-pmt.so
+-- Found GNURADIO_RUNTIME: /usr/local/lib/libgnuradio-runtime.so;/usr/local/lib/libgnuradio-pmt.so  
+GNURADIO_RUNTIME_FOUND = TRUE
+-- No C++ sources... skipping lib/
+-- No C++ sources... skipping swig/
+-- Found PythonInterp: /usr/bin/python2 (found suitable version "2.7.10", minimum required is "2") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hob/gr-rghob/build
+
+# la ultima herramienta es make
+
+hob@RG4:~/gr-rghob/build$ make
+Scanning dependencies of target pygen_python_81fd7
+[ 33%] Generating __init__.pyc, suma_ff.pyc
+[ 66%] Generating __init__.pyo, suma_ff.pyo
+[ 66%] Built target pygen_python_81fd7
+Scanning dependencies of target pygen_apps_9a6dd
+[ 66%] Built target pygen_apps_9a6dd
+Scanning dependencies of target doxygen_target
+[100%] Generating documentation with doxygen
+Warning: Tag `XML_SCHEMA' at line 1510 of file `/home/hob/gr-rghob/build/docs/doxygen/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+Warning: Tag `XML_DTD' at line 1516 of file `/home/hob/gr-rghob/build/docs/doxygen/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+[100%] Built target doxygen_target
+
+# ahora sí, la ultima, ultima herramienta es make
+
+hob@RG4:~/gr-rghob/build$ sudo make install
+[sudo] password for hob: 
+[ 66%] Built target pygen_python_81fd7
+[ 66%] Built target pygen_apps_9a6dd
+[100%] Built target doxygen_target
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /usr/local/lib/cmake/rghob/rghobConfig.cmake
+-- Installing: /usr/local/include/rghob/api.h
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/__init__.py
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/__init__.pyc
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/suma_ff.pyc
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/__init__.pyo
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/suma_ff.pyo
+-- Installing: /usr/local/share/gnuradio/grc/blocks/rghob_suma_ff.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/group__block.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/group__defs_8dox.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/namespacestd.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/dir_d44c64559bbebec7f509842c48db8b23.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/index.xsd
+-- Installing: /usr/local/share/doc/gr-rghob/xml/compound.xsd
+-- Installing: /usr/local/share/doc/gr-rghob/xml/dir_371a71f725e1a8763a6aa2b829b50c63.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/api_8h.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/main__page_8dox.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/index.xml
+-- Installing: /usr/local/share/doc/gr-rghob/xml/combine.xslt
+-- Installing: /usr/local/share/doc/gr-rghob/xml/indexpage.xml
+-- Installing: /usr/local/share/doc/gr-rghob/html
+-- Installing: /usr/local/share/doc/gr-rghob/html/arrowdown.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/folderclosed.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/dir_d44c64559bbebec7f509842c48db8b23.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/jquery.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/sync_off.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/nav_h.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/modules.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/api_8h.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/nav_f.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/doc.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/main__page_8dox.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/tab_a.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/files.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/dir_371a71f725e1a8763a6aa2b829b50c63.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/tab_s.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/tab_h.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/navtreedata.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/globals.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/open.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/tab_b.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/navtree.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/group__block.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/index.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/doxygen.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/api_8h.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/sync_on.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/globals_defs.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/closed.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/folderopen.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/navtreeindex0.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/group__defs_8dox.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/resize.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/modules.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/tabs.css
+-- Installing: /usr/local/share/doc/gr-rghob/html/files.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/arrowright.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/dynsections.js
+-- Installing: /usr/local/share/doc/gr-rghob/html/bc_s.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/navtree.css
+-- Installing: /usr/local/share/doc/gr-rghob/html/bdwn.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/nav_g.png
+-- Installing: /usr/local/share/doc/gr-rghob/html/api_8h_source.html
+-- Installing: /usr/local/share/doc/gr-rghob/html/doxygen.css
+-- Installing: /usr/local/share/doc/gr-rghob/html/splitbar.png
+
+# ahora sí, la ultima, definitivamente herramienta es make
+
+hob@RG4:~/gr-rghob/build$ sudo ldconfig
+
+Paso 6: correr el grc y usar
+
+hob@RG4:~/gr-rghob/build$ gnuradio-companion &
+[1] 7664
+hob@RG4:~/gr-rghob/build$ <<< Welcome to GNU Radio Companion 3.7.9.1 >>>
+
+Preferences file: /home/hob/.gnuradio/grc.conf
+Block paths:
+	/usr/local/share/gnuradio/grc/blocks
+	/home/hob/.grc_gnuradio
+
+Showing: ""
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+
+>>> Done
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+handler caught exception: global name 'in1' is not defined
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 55, in eval
+    try: self._callback()
+  File "/usr/local/lib/python2.7/dist-packages/gnuradio/gr/gateway.py", line 160, in __gr_block_handle
+    ) for i in self.__out_indexes],
+  File "/usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py", line 40, in work
+    out[:]=in0+in1
+NameError: global name 'in1' is not defined
+thread[thread-per-block[2]: <block suma_ff (1)>]: caught unrecognized exception
+cmake ..
+-- Build type not specified: defaulting to release.
+-- Boost version: 1.58.0
+-- Found the following Boost libraries:
+--   filesystem
+--   system
+Checking for GNU Radio Module: RUNTIME
+ * INCLUDES=/usr/local/include
+ * LIBS=/usr/local/lib/libgnuradio-runtime.so;/usr/local/lib/libgnuradio-pmt.so
+GNURADIO_RUNTIME_FOUND = TRUE
+-- No C++ sources... skipping lib/
+-- No C++ sources... skipping swig/
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hob/gr-rghob/build
+hob@RG4:~/gr-rghob/build$ make
+[ 33%] Generating __init__.pyc, suma_ff.pyc
+[ 66%] Generating __init__.pyo, suma_ff.pyo
+[ 66%] Built target pygen_python_81fd7
+[ 66%] Built target pygen_apps_9a6dd
+[100%] Built target doxygen_target
+hob@RG4:~/gr-rghob/build$ sudo make install
+[ 66%] Built target pygen_python_81fd7
+[ 66%] Built target pygen_apps_9a6dd
+[100%] Built target doxygen_target
+Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /usr/local/lib/cmake/rghob/rghobConfig.cmake
+-- Up-to-date: /usr/local/include/rghob/api.h
+-- Up-to-date: /usr/local/lib/python2.7/dist-packages/rghob/__init__.py
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/suma_ff.py
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/__init__.pyc
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/suma_ff.pyc
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/__init__.pyo
+-- Installing: /usr/local/lib/python2.7/dist-packages/rghob/suma_ff.pyo
+-- Up-to-date: /usr/local/share/gnuradio/grc/blocks/rghob_suma_ff.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/group__block.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/group__defs_8dox.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/namespacestd.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/dir_d44c64559bbebec7f509842c48db8b23.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/index.xsd
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/compound.xsd
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/dir_371a71f725e1a8763a6aa2b829b50c63.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/api_8h.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/main__page_8dox.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/index.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/combine.xslt
+-- Up-to-date: /usr/local/share/doc/gr-rghob/xml/indexpage.xml
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/arrowdown.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/folderclosed.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/dir_d44c64559bbebec7f509842c48db8b23.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/jquery.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/sync_off.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/nav_h.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/modules.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/api_8h.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/nav_f.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/doc.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/main__page_8dox.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/tab_a.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/files.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/dir_371a71f725e1a8763a6aa2b829b50c63.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/tab_s.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/tab_h.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/navtreedata.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/globals.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/open.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/tab_b.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/navtree.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/group__block.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/index.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/doxygen.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/api_8h.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/sync_on.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/globals_defs.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/closed.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/folderopen.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/navtreeindex0.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/group__defs_8dox.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/resize.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/modules.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/tabs.css
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/files.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/arrowright.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/dynsections.js
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/bc_s.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/navtree.css
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/bdwn.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/nav_g.png
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/api_8h_source.html
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/doxygen.css
+-- Up-to-date: /usr/local/share/doc/gr-rghob/html/splitbar.png
+hob@RG4:~/gr-rghob/build$ sudo ldconfig
+hob@RG4:~/gr-rghob/build$ gnuradio-companion &
+[2] 7900
+[1]   Done                    gnuradio-companion
+hob@RG4:~/gr-rghob/build$ <<< Welcome to GNU Radio Companion 3.7.9.1 >>>
+
+Preferences file: /home/hob/.gnuradio/grc.conf
+Block paths:
+	/usr/local/share/gnuradio/grc/blocks
+	/home/hob/.grc_gnuradio
+
+Loading: "/home/hob/Dropbox/EnUbuntuFull/CursoRG/MiPrimerBloqueGRC.grc"
+>>> Done
+
+Showing: "/home/hob/Dropbox/EnUbuntuFull/CursoRG/MiPrimerBloqueGRC.grc"
+
+Generating: '/home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py'
+>>> Warning: This flow graph may not have flow control: no audio or RF hardware blocks found. Add a Misc->Throttle block to your flow graph to avoid CPU congestion.
+
+Executing: /usr/bin/python2 -u /home/hob/Dropbox/EnUbuntuFull/CursoRG/top_block.py
+
+Using Volk machine: avx2_64_mmx_orc
+^C
+hob@RG4:~/gr-rghob/build$ 
+
