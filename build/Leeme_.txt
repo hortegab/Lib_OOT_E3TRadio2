@@ -1,0 +1,8 @@
+INSTRUCCIONES
+
+Desde la carpeta build realizar la instalación con los siguientes comandos:
+cmake ..
+make
+sudo make install
+sudo ldconfig
+
