@@ -27,7 +27,7 @@ from gnuradio import gr
 
 class e_canal_BER(gr.sync_block):
     """
-Es un canal AWGN (Additive Whaite Gaussian Noise, en banda base), por lo tanto recibe la envolvente compleja de una señal con modulacion digital y entrega la misma señal pero con ruido blanco gausiano aditivo. A diferencia de otros canales, tiene internamente un funcion que mide la potencia promedio de la senal entrante y, con el paso de cada simbolo, va variando la potencia del ruido para lograr que la relacion Es/No tome N posibles valores entre EsN0min y EsN0min. Despues de que esa relacion ha tomado ya N valores, todo se repite tantas veces como lo permita el tiempo en que dure corriendo el flujograma. Para lograr que otro dispositivo entienda como esta la salida de este bloque relacionada con un cierto valor de Es/No, el puerto out1 entrega el valor de la relacion Es/No asociado a cada muestra actual de la señal que sale por el puerto out0. Este bloque esta hecho para trabajar con el el bloque e_BERTool que interpreta las dos salidas mencionadas y pide la senal binaria antes y despues del canal para calcular la probalidad de perdida de bits con respecto a cada valor de Es/No.
+Es un canal AWGN (Additive White Gaussian Noise, en banda base), Recibe la envolvente compleja de una senal con modulacion digital. El bloque tiene dos salidas: out0, out1. En out0 entrega la misma senal recibida pero con ruido blanco gausiano aditivo con diferentes valores de potencia que corresponden a diferentes valores Es/No; en out1 entrega un valor de Es/No aplicado a cada muestra de out0. Este bloque se diferencia de otros bloques tradicionales de canal AWGN en lo siguiente: Tiene internamente una funcion que mide la potencia promedio de la senal entrante Ps, de modo que puede calcular Es=Ps/Rs; Al ir variando la potencia del ruido Pn se logra variar la relacion Es/No para que tome N posibles valores entre EsN0min y EsN0max. Con esto ha completado el primer ensayo para que otro sea el bloque que calcule la Curva de BER. Pero alli no para, sino que sigue realizando tantos ensayos como lo permita el tiempo de simulacion, para que el bloque que calcula la Curva de BER la pueda ir perfeccionando cada vez mas.
 
 Datos de configuracion del bloque:
 N: Es el numero de puntos discretos que va a tener la curva de BER. Tambien corresponde al numero de valores que tomará la relacion Es/No
@@ -35,9 +35,7 @@ EsN0min: El minimo valor a tener en cuenta para Es/No
 EsN0max: El maximo valor a tener en cuenta para Es/No
 Rs: es la rata de simbolos.
 B: Es una caracteristica de la senal entrante, corresponde a la frecuencia de muestreo de la señal entrante y puede ser mayor o igual a Rs. 
-Es: es la energia de un simbolo, 
-No: es la Densidad espectral del potencia del ruido blanco.
-SNR-Db: es la relacion senal a ruido en dB
+Es: es la energia de un simbolo
 
 Senales de entrada:
 In0: Envolvente compleja de señal con modulacion digital.
@@ -46,9 +44,12 @@ Senales de salida:
 out0: es la salida del canal, es decir, la misma señal entrante pero a la cual se le ha sumado un ruido para satisfacer una determinado valor para la relación Es/No
 out1: Es el valor Es/No aplicado a la salida actual.
 
+Algunas variables internas son:
+No: es la Densidad espectral del potencia del ruido blanco.
+SNR-Db: es la relacion senal a ruido en dB
 
 NOTA IMPORTANTE: 
-* Este bloque no deberia llamarse e_canal_BER, pues no manera bits, ni relacion alguna con ellos, solo simbolos.
+* Nos preguntamos si este bloque no deberia llamarse e_canal_BER, pues no manera bits, ni relacion alguna con ellos, solo simbolos. El nombre mas apropiado seria e_canal_EsN0
 * Este bloque no conoce el numero de bits por simbolo, por lo tanto no puede determinar la relacion Eb/No y lo que calcula es la BER con respecto a Es/No.
 * La Envolvente compleja puede tener varias muestras por simbolo (Sps), por ejemplo cuando ha pasado por un bloque de Wave Forming, por ello SampRate puede ser mayor o igual a Rs. SampRate=Rs*Sps. El problema es que en este caso, la salida out0 tendra tambien Sps valores por simbolo, lo cual debe ser tenido en cuenta por los bloques que usen esta senal.
 * Es es calculado como: Es = Ps x Ts, donde Ps es la potencia promedio de la senal entrante (se calcula internamente) y Ts es la duracion de cada simbolo o Ts = 1 / Rs. Entendemos que eso implica imaginar que los simbolos tienen forma rectangular, lo cual puede ser valido cuando la senal entrante trae modulacion digital basada en puntos de constelacion como es el caso de: BPSK, QPSK, MPSK, MQAM. En otras palabras, es una idealizacion pensada en una herramienta de analisis de Curvas de BER para comparar diferentes tipos de modulacion en condiciones similares.
@@ -74,7 +75,12 @@ NOTA IMPORTANTE:
         # calculo de la varianza (potencia promedio normalizada) de la senal entrante
         Pin=np.mean(np.absolute(input_items[0])**2)
         ###############################################################  
-        ##  Esta es donde esta el mehoyo y se puede optimizar mejor
+        ##  Esta es donde esta el mehoyo y se puede optimizar mejor  ##
+	##  Algo que se podria hacer es que le de mas atencion a los 
+	##  valores altos de Es/No que es donde es mas dificil de ob-##
+	##  tener la BER. Al parecer la forma facil de hacerlo es    ##
+        ##  hacer que el vector EsN0dB vaya cambiando, ya que por    ##
+	##  es estatico y es el que define que valores de EsN0dB usar##
         ###############################################################
         for i in range(0,L): 
             output_items[0][i] = input_items[0][i]+noise_c(self.EsN0dB[self.k], Pin,Rs,B1)
@@ -101,7 +107,12 @@ def noise_c(EsN0_dB,P_s,Rs,B):
     EsN0=pow(10.,EsN0_dB/10.) 
     SNR=EsN0*Rs/B
     P_n = P_s/SNR  # la potencia del ruido
-    sigma = math.sqrt(P_n) # es porque la funcion random.normal() pide la desviacion standard
-    n=np.random.normal(0.,sigma)+np.random.normal(0.,sigma)*1.j
-    
+    Vrms = math.sqrt(P_n) 
+    # random.normal() pide la desviacion standard pero es el mismo Valor RMS
+    # Vrms es el Valor RMS de la Envolvente compleja del ruido, pero la vamos
+    # a generar como un ruido real mas un ruido imaginario. Pero esas dos
+    # senales tienen un valor RMS un tanto diferente: Vrms_q=Vrms/math.sqrt(2.)
+    Vrms_q= Vrms/math.sqrt(2.)
+    n=np.random.normal(0.,Vrms_q)+np.random.normal(0.,Vrms_q)*1.j
+        
     return n
