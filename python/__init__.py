@@ -58,6 +58,8 @@ from retrazo_cc import retrazo_cc
 
 from e_canal_BER import e_canal_BER
 from e_BERtool import e_BERtool
+from mean_meter import mean_meter
+from power_meter import power_meter
 
 
 

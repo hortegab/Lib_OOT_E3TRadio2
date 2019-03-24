@@ -60,7 +60,9 @@ GR_PYTHON_INSTALL(
     retrazo_ff.py
     retrazo_cc.py
     e_canal_BER.py
-    e_BERtool.py DESTINATION ${GR_PYTHON_DIR}/E3TRadio
+    e_BERtool.py
+    mean_meter.py
+    power_meter.py DESTINATION ${GR_PYTHON_DIR}/E3TRadio
 )
 
 ########################################################################
