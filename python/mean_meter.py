@@ -681,7 +681,7 @@ from gnuradio import gr
 
 class mean_meter(gr.sync_block):
     """
-    Mean meter of a signal. Done by: Homero Ortega Boada. The input is the signal to measured. The output is the mean of the signal recalculated each time for every input sample, so that over the time this value tends to be a constant. The reset (reset=0 or reset=1) parameter is usefull to reset the internal counter and accumulator, so that the block can be forced by this parameter to begin calculation again from zero. It is usefull when you have to make many test from zero wihtout stopping the flowchart. As it is a sync block it gives an output sample for every input sample, but values varies by a step of samples because the mean is recalculated for a vector of lengh=step
+    Mean meter of a signal. Done by: Homero Ortega Boada.The input is the signal to measured. The output is the mean of the signal recalculated each time for every input sample, so that over the time this value tends to be a constant. The reset (reset=0 or reset=1) parameter is usefull to reset the internal counter and accumulator, so that the block can be forced by this parameter to begin calculation again from zero. It is usefull when you have to make many test from zero wihtout stopping the flowchart. As it is a sync block it gives an output sample for every input sample, but values varies by a step of samples because the mean is recalculated for a vector of lengh=step
     """
     def __init__(self, reset=1):
         gr.sync_block.__init__(self,
@@ -692,7 +692,6 @@ class mean_meter(gr.sync_block):
 	self.acum=0
         self.reset=reset
 
-
     def work(self, input_items, output_items):
         in0 = input_items[0]
         out0 = output_items[0]
@@ -702,8 +701,9 @@ class mean_meter(gr.sync_block):
 	self.acum += np.sum(in0)
 	out0[:] = self.acum/self.contador
         return len(output_items[0])
-    # Este es el caller que permite cambiar en caliente el reset
-    # el xml debe ser informado que esta es la funcion a llamar para ese tipo de cambios
+    # The next one is the caller fuction. It allows to make reset from 
+    # external order
+
     def set_reset(self, reset):
         self.reset=reset
 

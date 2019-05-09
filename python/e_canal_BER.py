@@ -81,6 +81,13 @@ NOTA IMPORTANTE:
 	##  tener la BER. Al parecer la forma facil de hacerlo es    ##
         ##  hacer que el vector EsN0dB vaya cambiando, ya que por    ##
 	##  es estatico y es el que define que valores de EsN0dB usar##
+        ## Otro aspecto que se puede mejorar es que: los bloques que ##
+        ## se benefician de este bloque, tienen que convertir lo que ##
+        ## le entregamos a un vecotr de tamano N. Para esa gracia,   ##
+        ## lo conveniente sería exigir que las señales que entran y  ##
+        ## salen de este bloque sean de tipo vectorial, con tamano N. ##
+        ## Supongo que ya tenemos un valor fijo para L=N nos liberaremos
+        ## de los for e if de abajo                                  ##
         ###############################################################
         for i in range(0,L): 
             output_items[0][i] = input_items[0][i]+noise_c(self.EsN0dB[self.k], Pin,Rs,B1)
