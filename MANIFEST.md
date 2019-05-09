@@ -3,7 +3,7 @@ brief: Short description of gr-E3TRadio
 tags: # Tags are arbitrary, but look at CGRAN what other authors are using
   - sdr
 author:
-  - Author Name <authors@email.address>
+  - Author Name <homero.ortega@radiogis.uis.edu.co>
 copyright_owner:
   - Copyright Owner 1
 license:
