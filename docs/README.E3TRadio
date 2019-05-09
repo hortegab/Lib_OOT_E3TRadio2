@@ -3,7 +3,7 @@ You have to have installed gnuradio library to be able to install this OOT. OOT 
 
 INSTRUCCIONES
 
-Desde la carpeta build realizar la instalación con los siguientes comandos:
+Entra a la carpeta build. Si tiene cosas bórralas, realizar la instalación por terminal con los siguientes comandos:
 cmake ..
 make
 sudo make install
