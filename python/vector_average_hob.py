@@ -45,6 +45,11 @@ Nensayos: Es el umbral que limita el numero maximo de promedios correctamente re
         # contra otros vectores. Es entonces cuando se revela una cualidad de la entrada input_items
         # y es que lo que uno creería que es un vector de N valores, pero es realmente una matriz
         # de M vectores o filas, cada uno de N valores. Lo que nos interesa está en el vector M=0
+        # 1) creo que hay que probar que hay en las otras filas de la matriz, de pronto son otras partes de la misma senal
+        # osea, es posible que toda la matriz sea de una sola senal vectorial, algo así como un conjunto de trenes
+        # 2) probara a agregar una salida que bote cuantas funciones muestras se ha procesado hasta el momento 
+        # 3) probar si se puede quitar el for haciendo esto:
+        # self.med = self.med*(self.count-1)/self.count+in0/self.count. hay que probar eso primero en python
         # print(in0.shape)
         out = output_items[0]
         # <+signal processing here+>
