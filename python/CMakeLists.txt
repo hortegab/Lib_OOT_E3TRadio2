@@ -62,7 +62,9 @@ GR_PYTHON_INSTALL(
     e_canal_BER.py
     e_BERtool.py
     mean_meter.py
-    power_meter.py DESTINATION ${GR_PYTHON_DIR}/E3TRadio
+    power_meter.py
+    vec_diagrama_ojo2_f.py
+    vec_diagrama_ojo_f.py DESTINATION ${GR_PYTHON_DIR}/E3TRadio
 )
 
 ########################################################################

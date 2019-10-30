@@ -48,5 +48,7 @@ install(FILES
     E3TRadio_e_canal_BER.xml
     E3TRadio_e_BERtool.xml
     E3TRadio_mean_meter.xml
-    E3TRadio_power_meter.xml DESTINATION share/gnuradio/grc/blocks
+    E3TRadio_power_meter.xml
+    E3TRadio_vec_diagrama_ojo2_f.xml
+    E3TRadio_vec_diagrama_ojo_f.xml DESTINATION share/gnuradio/grc/blocks
 )
