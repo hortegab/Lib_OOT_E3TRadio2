@@ -48,7 +48,7 @@ from diezmoppenh3_ff import diezmoppenh3_ff
 from diezma_ff import diezma_ff
 
 
-from usrp2usrp1_cc import usrp2usrp1_cc
+
 
 from zero_order_hold2_cc import zero_order_hold2_cc
 from zero_order_hold_bb import zero_order_hold_bb

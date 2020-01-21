@@ -53,7 +53,6 @@ GR_PYTHON_INSTALL(
     v_delay.py
     diezmoppenh3_ff.py
     diezma_ff.py
-    usrp2usrp1_cc.py
     zero_order_hold2_cc.py
     zero_order_hold_bb.py
     ifft_jesus.py
@@ -84,7 +83,6 @@ GR_ADD_TEST(qa_delay_hob_ff ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_
 GR_ADD_TEST(qa_v_delay ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_v_delay.py)
 GR_ADD_TEST(qa_diezmoppenh3_ff ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_diezmoppenh3_ff.py)
 GR_ADD_TEST(qa_diezma_ff ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_diezma_ff.py)
-GR_ADD_TEST(qa_usrp2usrp1_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_usrp2usrp1_cc.py)
 GR_ADD_TEST(qa_zero_order_hold2_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_zero_order_hold2_cc.py)
 GR_ADD_TEST(qa_zero_order_hold_bb ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_zero_order_hold_bb.py)
 GR_ADD_TEST(qa_ifft_jesus ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ifft_jesus.py)
