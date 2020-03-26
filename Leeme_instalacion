@@ -1,5 +1,6 @@
 PRERREQUISITOS
-Fuera de las librerias que pueden ser tradicionales en Python, debe instalarse previamente la libreria Eyediagram. Para hacerlo, se tiene un instalador con instrucciones en:  https://github.com/hortegab/comdig_Diagrama-de-ojo-Comunicaciones-II.git
+- Fuera de las librerias que pueden ser tradicionales en Python, debe instalarse previamente la libreria Eyediagram. Para hacerlo, se tiene un instalador con instrucciones en:  https://github.com/hortegab/comdig_Diagrama-de-ojo-Comunicaciones-II.git
+- lo anterior puede ser un problema porque instalar Eyediagram no es facil. Los autores están pensando en retirar los bloque relacionados con Eyediagram de este OOT y crear un OOT separado para ellos.
 
 Si algún dia surge la necesidad de prescindir de la instalación de EyeDiagram, lo que hay que tener en cuenta que solo tenemos dos bloques que dependen de ella y habría que eliminarlos del OOT, esto son:
 - vec_diagrama_ojo_f
