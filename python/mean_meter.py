@@ -681,7 +681,7 @@ from gnuradio import gr
 
 class mean_meter(gr.sync_block):
     """
-    Mean meter of a signal. Done by: Homero Ortega Boada.The input is the signal to measured. The output is the mean of the signal recalculated each time for every input sample, so that over the time this value tends to be a constant. The reset (reset=0 or reset=1) parameter is usefull to reset the internal counter and accumulator, so that the block can be forced by this parameter to begin calculation again from zero. It is usefull when you have to make many test from zero wihtout stopping the flowchart. As it is a sync block it gives an output sample for every input sample, but values varies by a step of samples because the mean is recalculated for a vector of lengh=step
+    Mean meter of a signal. Done by: Homero Ortega Boada.The input is the signal to measured. The output is the mean of the signal recalculated each time for every input sample, so that over the time this value tends to be a constant. The reset (reset=0 or reset=1) parameter is usefull to reset the internal counter and accumulator, so that the block can be forced by this parameter to begin calculation again from zero. For calculating the mean of a signal in a longtime reset=1. It is usefull when you have to make many test from zero wihtout stopping the flowchart. As it is a sync block it gives an output sample for every input sample, but values varies by a step of samples because the mean is recalculated for a vector of lengh=step
     """
     def __init__(self, reset=1):
         gr.sync_block.__init__(self,
