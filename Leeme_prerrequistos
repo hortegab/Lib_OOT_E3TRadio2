@@ -1,0 +1,50 @@
+# PRERREQUISITOS (DEPENDENCIAS)
+Aquí se describe lo que hay que instalar previamente. Lo que se instala solo la primera vez. Usted no debe hacer esto si ya ha instalado antes este paquere y ahora solo quiere actualizarlo.
+
+Todo lo siguiente se instala en forma de comandos por terminal ubuntu.
+
+## Lo que siempre se hace - la Actualización del sistema
+Siempre que vaya a hacer cualquier cosa sobre Ubuntu debes actualizar tu sistema, más aún cuando se trata de instalaciones de paquetes. Estos son los cmandos para actualizar el sistema:
+
+$ sudo apt-get update
+$ sudo apt-get upgrade
+
+## Lo que se supone que usted ya tiene
+Se supone que usted ya tiene instalado:
+
+- git ya que seguramente lo usó para bajar este paquete. Si acaso no tiene instalado git, este es el comando para hacerlo:
+
+$ sudo apt install git
+
+- gnuradio version 3.8.1. Si no lo tiene, es tan simple como enviar el comando:
+
+sudo apt install gnuradio
+
+## Instalación de aplicaciones
+$ sudo apt install --fix-broken
+
+$ sudo apt install xterm
+$ sudo apt-get install cmake make
+
+## Instalación de Liberias de python3
+$ sudo apt install python3-pip
+$ sudo apt install python3-pip python3-click-plugins
+$ pip3 install numpy scipy mako sphinx lxml pyqt5 click zmq markdown cython matplotlib
+$ pip3 install click zmq markdown cython matplotlib
+$ pip3 install pyyaml
+$ pip3 install git+https://github.com/pyqtgraph/pyqtgraph@master
+
+## Instalacion de la libreria de python para el diagrama de ojo
+
+$ pip3 install git+https://github.com/hortegab/comdig_DiagramaOjo.3.8
+
+## Comprobación
+Revise si lo que corresponde a python quedó instalado, con este comando:
+$ pip3 list
+
+Debe comprobar que mínimamente esté instalado:
+- eyediagram
+- Markdown
+- Matplotlib
+- numpy
+- scipy
